@@ -1,0 +1,21 @@
+version: 2
+# Python dependencies are hash-locked (backend/requirements.lock) and bumped by hand, so pip is not listed.
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 14
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 14
+  - package-ecosystem: npm
+    directory: /build
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 14

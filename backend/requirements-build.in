@@ -1,0 +1,13 @@
+# EVA - build-time tooling (NOT part of the runtime dependency set).
+# Compiled into requirements-build.lock; build/scripts/build-backend.ps1 installs
+# requirements.lock + requirements-build.lock into a fresh Python 3.11 venv.
+#
+# The constraint (-c requirements.lock) keeps packages shared with the runtime
+# set (setuptools, packaging) at the runtime lock's versions, so the two files
+# install together without a version conflict.
+#
+# Regenerate after editing this file (or after re-locking requirements.lock):
+#
+#   uv pip compile requirements-build.in -o requirements-build.lock --universal \
+#       --python-version 3.11 --generate-hashes -c requirements.lock
+pyinstaller>=6.10,<7

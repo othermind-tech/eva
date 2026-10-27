@@ -1,0 +1,11 @@
+EVA
+Copyright 2026 Anand Balagopalan
+
+This product includes software developed by Anand Balagopalan and contributors.
+
+EVA is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party components that are included with, or required by, EVA are listed
+in THIRD_PARTY_LICENSES.md. Each is governed by its own license.
+
+The EVA name and logos (including the artwork in branding/) are not licensed for use as trademarks: the Apache License 2.0 grants no permission to use them (see section 6 of the License), except for reasonable and customary use in describing the origin of EVA.

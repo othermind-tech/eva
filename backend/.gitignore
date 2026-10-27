@@ -1,0 +1,44 @@
+**/__pycache__/
+**/.env
+**/.db
+**/*.pyc
+qdrant_storage/
+.claude/
+
+# Environment / secrets — NEVER commit these
+eva.env
+*.env
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+
+# Logs
+logs/
+*.log
+
+# Execution runtime markers (B2-1.7/4.3, dev fallback location)
+.runtime/
+
+# Runtime cache files
+providers/capability/*/models_cache.json
+
+# Test and tool output artifacts
+output.txt
+test_output.log
+*.output.log
+*_output.txt
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,234 @@
+[
+  {
+    "id": "01-introduction",
+    "title": "Introduction",
+    "pages": [
+      {
+        "id": "01-introduction/01-getting-started",
+        "title": "Getting Started"
+      },
+      {
+        "id": "01-introduction/02-what-is-eva",
+        "title": "What is EVA?"
+      },
+      {
+        "id": "01-introduction/03-key-concepts-glossary",
+        "title": "Key Concepts & Glossary"
+      }
+    ]
+  },
+  {
+    "id": "02-conversations",
+    "title": "Conversations & Chat",
+    "pages": [
+      {
+        "id": "02-conversations/01-conversations",
+        "title": "Conversations"
+      },
+      {
+        "id": "02-conversations/02-context-and-attachments",
+        "title": "Context & Attachments"
+      },
+      {
+        "id": "02-conversations/03-chat-mode-vs-plan-mode",
+        "title": "Chat Mode vs Plan Mode"
+      },
+      {
+        "id": "02-conversations/04-approvals",
+        "title": "Approvals"
+      },
+      {
+        "id": "02-conversations/05-conversation-history",
+        "title": "Conversation History"
+      },
+      {
+        "id": "02-conversations/06-long-conversations",
+        "title": "Long Conversations"
+      },
+      {
+        "id": "02-conversations/07-activity-and-preview",
+        "title": "Activity and the Preview Pane"
+      }
+    ]
+  },
+  {
+    "id": "03-tools",
+    "title": "Tools",
+    "pages": [
+      {
+        "id": "03-tools/01-what-are-tools",
+        "title": "What are Tools?"
+      },
+      {
+        "id": "03-tools/02-enabling-disabling-tools",
+        "title": "Enabling & Disabling Tools"
+      }
+    ]
+  },
+  {
+    "id": "04-plan-execute-verify",
+    "title": "Plan-Execute-Verify",
+    "pages": [
+      {
+        "id": "04-plan-execute-verify/01-what-is-pev",
+        "title": "What is Plan-Execute-Verify?"
+      }
+    ]
+  },
+  {
+    "id": "05-projects",
+    "title": "Projects",
+    "pages": [
+      {
+        "id": "05-projects/01-what-are-projects",
+        "title": "What are Projects?"
+      },
+      {
+        "id": "05-projects/02-creating-a-project",
+        "title": "Creating a Project"
+      }
+    ]
+  },
+  {
+    "id": "06-memory",
+    "title": "Memory",
+    "pages": [
+      {
+        "id": "06-memory/01-how-eva-remembers-you",
+        "title": "How EVA Remembers You"
+      },
+      {
+        "id": "06-memory/02-what-eva-knows",
+        "title": "What EVA Knows"
+      },
+      {
+        "id": "06-memory/03-memory-and-privacy",
+        "title": "Memory & Privacy"
+      }
+    ]
+  },
+  {
+    "id": "07-rag",
+    "title": "Knowledge Base",
+    "pages": [
+      {
+        "id": "07-rag/01-knowledge-base",
+        "title": "Knowledge Base"
+      }
+    ]
+  },
+  {
+    "id": "08-subagents",
+    "title": "Subagents",
+    "pages": [
+      {
+        "id": "08-subagents/01-what-are-subagents",
+        "title": "What are Subagents?"
+      },
+      {
+        "id": "08-subagents/02-built-in-agents",
+        "title": "Built-in Agents"
+      },
+      {
+        "id": "08-subagents/03-creating-custom-agents",
+        "title": "Creating Custom Agents"
+      }
+    ]
+  },
+  {
+    "id": "09-daemons",
+    "title": "Daemons",
+    "pages": [
+      {
+        "id": "09-daemons/01-what-are-daemons",
+        "title": "What are Daemons?"
+      }
+    ]
+  },
+  {
+    "id": "10-skills",
+    "title": "Skills",
+    "pages": [
+      {
+        "id": "10-skills/01-what-are-skills",
+        "title": "What are Skills?"
+      },
+      {
+        "id": "10-skills/02-managing-your-skill-library",
+        "title": "Managing Your Skill Library"
+      }
+    ]
+  },
+  {
+    "id": "11-hooks",
+    "title": "Hooks",
+    "pages": [
+      {
+        "id": "11-hooks/01-what-are-hooks",
+        "title": "What are Hooks?"
+      }
+    ]
+  },
+  {
+    "id": "12-mcp",
+    "title": "MCP Servers",
+    "pages": [
+      {
+        "id": "12-mcp/01-what-are-mcp-servers",
+        "title": "What are MCP Servers?"
+      }
+    ]
+  },
+  {
+    "id": "13-providers",
+    "title": "Providers",
+    "pages": [
+      {
+        "id": "13-providers/01-configuring-providers",
+        "title": "Configuring Providers"
+      }
+    ]
+  },
+  {
+    "id": "14-analytics",
+    "title": "Analytics",
+    "pages": [
+      {
+        "id": "14-analytics/01-usage-and-costs",
+        "title": "Usage & Costs"
+      }
+    ]
+  },
+  {
+    "id": "15-configuration",
+    "title": "Configuration",
+    "pages": [
+      {
+        "id": "15-configuration/01-configuration-reference",
+        "title": "Configuration Reference"
+      }
+    ]
+  },
+  {
+    "id": "16-appendix",
+    "title": "Appendix",
+    "pages": [
+      {
+        "id": "16-appendix/01-eva-vs-competitors",
+        "title": "EVA vs Competitors"
+      },
+      {
+        "id": "16-appendix/02-privacy-and-security",
+        "title": "Privacy & Security"
+      },
+      {
+        "id": "16-appendix/03-technology-stack",
+        "title": "Technology Stack"
+      },
+      {
+        "id": "16-appendix/04-open-source",
+        "title": "Open Source"
+      }
+    ]
+  }
+]

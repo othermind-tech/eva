@@ -1,0 +1,39 @@
+name: Bug report
+description: Something in EVA does not work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. **Do not paste API keys, tokens or personal data.** For security problems use the private advisory form instead.
+  - type: input
+    id: version
+    attributes:
+      label: EVA version
+      description: Shown in the app under Settings, or in the installer file name.
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How are you running EVA?
+      options: [Windows installer, From source]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove anything private first.

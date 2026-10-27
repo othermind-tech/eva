@@ -1,0 +1,112 @@
+# EVA — Python dependencies (DIRECT dependencies; edit this file)
+#
+# V6.59: install from the hash-locked file, NOT from this one:
+#
+#   uv venv .venv --python 3.11
+#   uv pip sync requirements.lock requirements-dev.lock --require-hashes
+#
+# requirements.lock pins the full transitive set with sha256 hashes (universal:
+# one file for Windows / Linux / macOS) so a swapped or malicious release fails
+# the install. Regenerate it after changing this file:
+#
+#   uv pip compile requirements.txt -o requirements.lock --universal \
+#       --python-version 3.11 --generate-hashes
+#
+# Bump a single package without moving the rest (uv keeps existing pins):
+#
+#   uv pip compile requirements.txt -o requirements.lock --universal \
+#       --python-version 3.11 --generate-hashes --upgrade-package <name>
+#
+# Python 3.11 is the supported runtime (the packaged app and the dev server).
+# Optional packages are marked with comments; remove lines you do not need.
+
+# ── Web framework ─────────────────────────────────────────────────────────────
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0      # standard extras: websockets, httptools
+python-multipart>=0.0.9        # form data + file uploads (FastAPI dependency)
+
+# ── Database ──────────────────────────────────────────────────────────────────
+sqlalchemy[asyncio]>=2.0.0     # async ORM; [asyncio] extra = greenlet, which SQLAlchemy 2.1+ no longer installs by default
+aiosqlite>=0.21.0              # async SQLite driver (default DB)
+asyncpg>=0.29.0                # async PostgreSQL driver (optional; for prod)
+alembic>=1.13.0                # database migrations
+
+# ── LLM Providers ─────────────────────────────────────────────────────────────
+# B2-2.1 (2026-08-18): openai/anthropic/litellm are the fastest-moving
+# dependencies in this file and the ones actually exercised on every LLM
+# call -- the same class of risk that broke real signup when bcrypt>=5.0
+# silently landed (see the bcrypt pin below). Upper-bounded to the next
+# major from what's currently installed and tested; bump deliberately,
+# not automatically, after re-testing.
+openai>=2.20.0,<3.0.0          # OpenAI provider handler (floor raised: litellm 1.106 requires >=2.20)
+groq>=0.9.0                    # Groq provider handler
+anthropic>=0.40.0,<1.0.0       # Anthropic (Claude) native handler
+# V6.59 Phase 0: litellm is pinned EXACTLY (not a range). Releases 1.82.7 and
+# 1.82.8 were malicious (PyPI supply-chain compromise, 2026-03-24) and an open
+# range is how such a release gets pulled in automatically. Bump deliberately,
+# after verifying the new release (hash, wheel contents, advisories). The full transitive set
+# is locked with hashes in requirements.lock; install from the lock.
+#
+# litellm 1.106.0's tool-calling path imports mcp.types.CacheableResult, which
+# only exists in mcp>=2.2 -- so litellm >=1.106 and mcp>=2.2 move together
+# (bisected: 1.89.7..1.105.1 work with mcp 1.x, 1.106.0 is the first that does
+# not). EVA's MCP client (core/mcp/connection.py) is migrated to the mcp 2.x API.
+litellm==1.106.0               # LiteLLM aggregator + fallback routing
+ollama>=0.3.0                  # Ollama local-inference handler (optional)
+
+# ── Auth / Security ───────────────────────────────────────────────────────────
+python-jose[cryptography]>=3.3.0   # JWT encode/decode
+passlib[bcrypt]>=1.7.4             # password hashing
+# bcrypt>=5.0 removed the `__about__` submodule passlib 1.7.4's backend
+# version-detection reads (_bcrypt.__about__.__version__) -- with it gone,
+# passlib's own internal self-test misfires and every hash_password() call
+# fails with "password cannot be longer than 72 bytes", even for short
+# passwords (found 2026-08-17: this broke real signup, not just a test).
+# Pin below the break until passlib ships a fix upstream.
+bcrypt>=4.0.0,<5.0.0
+
+# ── PII Redaction (S-03) ──────────────────────────────────────────────────────
+# Offline NLP-based PII detection -- no network call, no third-party API.
+# presidio-analyzer finds PII (regex + checksum recognizers for structured
+# entities like SSN/credit card, plus spaCy NER for names/orgs/locations);
+# presidio-anonymizer replaces what it finds. spaCy's small English model is
+# the NLP backend presidio-analyzer needs for its NER-based recognizers --
+# pinned to an exact wheel URL (not a PyPI name) since spaCy models are
+# published as GitHub release assets, not on PyPI.
+presidio-analyzer>=2.2.0,<3.0.0
+presidio-anonymizer>=2.2.0,<3.0.0
+spacy>=3.8.0,<4.0.0
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+
+# ── Pydantic ──────────────────────────────────────────────────────────────────
+pydantic[email]>=2.0.0        # [email] extra = email-validator, required by EmailStr in core/auth/schemas.py (was an undeclared dependency)
+pydantic-settings>=2.0.0      # Settings / env-var binding (BaseSettings)
+
+# ── Vector Store / RAG ────────────────────────────────────────────────────────
+chromadb>=0.5.0                # ChromaDB embedded vector database (pure-Python, no Docker)
+onnxruntime>=1.18.0            # ONNX inference for embeddings (CPU; replaces sentence-transformers + torch)
+tokenizers>=0.19.0             # HuggingFace Rust tokenizer (fast, no torch dependency)
+huggingface_hub>=0.23.0        # Model download + caching (all-MiniLM-L6-v2 ONNX weights)
+numpy>=1.26.0                  # Tensor ops for ONNX output pooling
+tiktoken>=0.7.0                # Token counting (OpenAI tokenizer)
+
+# ── HTTP ──────────────────────────────────────────────────────────────────────
+httpx>=0.27.0                  # Async HTTP client (MCP, provider APIs)
+requests>=2.31.0               # Sync HTTP client
+
+# ── Document ingestion (RAG) ──────────────────────────────────────────────────
+pypdf>=4.0.0,<7.0.0            # PDF text extraction (BSD-3-Clause; pure Python)
+docx2txt>=0.8                  # DOCX parsing
+
+# ── Web search ────────────────────────────────────────────────────────────────
+ddgs>=9.0.0                    # DuckDuckGo search (web_search tool)
+
+# ── MCP (Model Context Protocol) ─────────────────────────────────────────────
+mcp>=2.2.0,<3                  # MCP client SDK (stdio / HTTP / SSE transports). v2 API: streamable_http_client(http_client=...), snake_case result fields, MCPError, httpx2
+
+# ── Data / utilities ──────────────────────────────────────────────────────────
+pandas>=2.0.0                  # Tabular data utilities
+PyYAML>=6.0                    # YAML parsing (hook scripts, config)
+python-dotenv>=1.0.0           # .env file loading (supplementary; EVA uses env_loader.py)
+keyring>=25.0.0                # Windows Credential Manager — stores provider API keys + SECRET_KEY
+psutil>=5.9.0                  # Cross-platform process management (background_process lifecycle: identity checks, tree-kill) — one implementation for Windows/Linux/macOS instead of hand-rolled per-OS branches

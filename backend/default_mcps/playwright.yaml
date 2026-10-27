@@ -1,0 +1,72 @@
+# default_mcps/playwright.yaml
+#
+# Browser automation for EVA's app-building loop (gap M-02): lets the agent
+# open a page (e.g. the dev server it started with background_process), read
+# the accessibility snapshot, console errors and network failures, click and
+# type, and take screenshots -- so it can see what actually broke at runtime
+# instead of guessing from static output.
+#
+# Seeded DISABLED on purpose. ~25 browser_* tool schemas would otherwise ride
+# along in every conversation's tool set (token cost for users who never build
+# a web app), and a headed browser window should never appear unasked. Turn it
+# on from the MCP panel (or PUT /mcp/{id} {"enabled": true}); enabling
+# auto-syncs the tool cache. Per-project scoping via a project's
+# allowed_mcp_servers works as it does for any MCP.
+#
+# Placeholders (resolved per user at seed time by core/defaults/seeder.py):
+#   {workspace}       the user's EVA workspace directory
+#   {browser_channel} msedge on Windows (always installed there), chrome elsewhere
+#
+# CDP-embedded preview pane: the args below (standalone browser, seeded once
+# per user at signup) are the fallback used whenever no live CDP endpoint is
+# registered. When EVA's own Electron app has its embedded preview pane open,
+# core/mcp/preview_registry.py's resolve_connection_args() swaps this entire
+# args list for a --cdp-endpoint one instead, at actual connection time (not
+# baked in here) -- see that module for the full args and why it's a whole-
+# list swap rather than a {cdp_endpoint} substitution into this one.
+#
+# Flags:
+#   --isolated               in-memory browser profile -- never touches the
+#                            user's real browser profile, cookies or logins
+#   --image-responses omit   screenshots are written to output-dir as files and
+#                            never inlined as base64 (which would flood the
+#                            model's context and is useless to text-only models)
+#   --file-paths absolute    file paths in tool results (screenshots, console logs)
+#                            are absolute. Relative ones resolve against Playwright's
+#                            own cwd (the workspace), but EVA's file tools resolve
+#                            relative paths against the *conversation* directory, so
+#                            a relative path here is unreadable to the agent -- live
+#                            testing showed it repeatedly failing to open a console
+#                            log it had just written (read_file / list_files "not found").
+#   (no --headless)          the browser window is visible so the user can watch
+#                            the agent work; add "--headless" to hide it
+#
+# The version is pinned so behaviour is reproducible; bump it deliberately.
+
+name: playwright
+description: >
+  Browser automation (Playwright): navigate, read page snapshots, console
+  errors and network requests, click, type, take screenshots. Used to test and
+  debug web apps the agent builds. Requires Node.js (npx) and Microsoft Edge
+  (Windows) or Google Chrome. When EVA's own preview pane is open, this drives
+  that same visible window instead of a separate one -- the user is watching
+  it live, so narrate actions as visible steps ("clicking the login button"),
+  not as work happening somewhere unseen.
+transport: stdio
+command: npx
+args:
+  - "-y"
+  - "@playwright/mcp@0.0.82"
+  - "--browser"
+  - "{browser_channel}"
+  - "--isolated"
+  - "--image-responses"
+  - "omit"
+  - "--file-paths"
+  - "absolute"
+  - "--output-dir"
+  - "{workspace}/_browser_output"
+cwd: "{workspace}"
+enabled: false
+requires:
+  - npx

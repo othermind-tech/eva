@@ -1,0 +1,67 @@
+# ─── Secrets and credentials (never commit these) ─────────────────────────────
+.env
+.env.local
+.env.*.local
+*.env
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.kdbx
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+credentials*.json
+service-account*.json
+secrets/
+
+# ─── Local data (databases, backups, logs, runtime state) ─────────────────────
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite
+*.sqlite3
+*.bak
+*.bak_*
+*.log
+logs/
+.runtime/
+
+# ─── AI assistant / agent working folders ─────────────────────────────────────
+.claude/
+
+# ─── Backend ──────────────────────────────────────────────────────────────────
+backend/eva.env
+backend/onnx_model/
+backend/tiktoken_cache/
+backend/build-tmp/
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/.venv/
+backend/venv/
+backend/env/
+backend/backend-dist/
+backend/qdrant_storage/
+backend/providers/capability/*/models_cache.json
+backend/output.txt
+backend/test_output.log
+backend/*.output.log
+
+# ─── Frontend ─────────────────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+
+# ─── Build / Electron ─────────────────────────────────────────────────────────
+build/node_modules/
+installer/
+
+# ─── OS / Editor ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

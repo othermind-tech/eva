@@ -1,0 +1,8 @@
+Place your icon files here:
+  icon.ico   -- Windows (256x256, multi-size ICO)
+  icon.icns  -- macOS
+  icon.png   -- Linux (512x512 PNG)
+
+You can generate these from a single high-res PNG using:
+  https://www.electronforge.io/guides/create-and-add-icons
+  or: npm install -g electron-icon-builder

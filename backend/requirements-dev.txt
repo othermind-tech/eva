@@ -1,0 +1,12 @@
+# EVA — development / test-only dependencies (NOT shipped in the packaged app)
+#
+# Locked together with requirements.lock so the test environment resolves to
+# exactly the same versions of every shared package as the runtime:
+#
+#   uv pip compile requirements-dev.txt -c requirements.lock \
+#       -o requirements-dev.lock --universal --python-version 3.11 --generate-hashes
+#   uv pip sync requirements.lock requirements-dev.lock --require-hashes
+#
+# The suite uses plain pytest plus unittest.IsolatedAsyncioTestCase -- no
+# pytest plugins are required (verified: no pytest-asyncio / anyio markers).
+pytest>=8.0.0

@@ -1,0 +1,67 @@
+{
+  "name": "eva",
+  "version": "0.1.0",
+  "description": "EVA - AI Assistant Desktop App",
+  "author": "Anand Balagopalan",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/othermind-tech/eva",
+  "repository": { "type": "git", "url": "https://github.com/othermind-tech/eva.git" },
+  "main": "main.js",
+  "scripts": {
+    "start":      "electron .",
+    "build:win":  "electron-builder --win --publish never",
+    "obfuscate":  "node obfuscate-renderer.js"
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.7",
+    "ws":               "^8.21.3"
+  },
+  "devDependencies": {
+    "@electron/fuses":    "^1.8.0",
+    "electron":           "^44.0.0",
+    "electron-builder":   "^25.1.8",
+    "javascript-obfuscator": "^4.1.1",
+    "playwright":         "^1.63.0"
+  },
+  "build": {
+    "appId":           "tech.othermind.eva",
+    "productName":     "EVA",
+    "copyright":       "Copyright © 2026 Anand Balagopalan",
+    "forceCodeSigning": false,
+    "asar":            true,
+    "directories": {
+      "output": "../installer"
+    },
+    "extraResources": [
+      {
+        "from":   "../backend/backend-dist/eva-backend/",
+        "to":     "backend/"
+      },
+      {
+        "from":   "../frontend/dist/",
+        "to":     "frontend_dist/"
+      }
+    ],
+    "afterPack": "./after-pack.js",
+    "publish": {
+      "provider": "github",
+      "owner":    "othermind-tech",
+      "repo":     "eva"
+    },
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon":   "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick":                           false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut":              true,
+      "createStartMenuShortcut":            true,
+      "artifactName":                       "EVA-Setup.exe",
+      "installerIcon":                      "assets/icon.ico",
+      "uninstallerIcon":                    "assets/icon.ico",
+      "uninstallDisplayName":              "EVA",
+      "include":                            "custom.nsh"
+    }
+  }
+}

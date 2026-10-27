@@ -20,7 +20,7 @@
     "@electron/fuses":    "^1.8.0",
     "electron":           "^44.0.0",
     "electron-builder":   "^25.1.8",
-    "javascript-obfuscator": "^4.1.1",
+    "javascript-obfuscator": "^5.9.0",
     "playwright":         "^1.63.0"
   },
   "build": {

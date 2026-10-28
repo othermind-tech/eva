@@ -23,6 +23,9 @@
     "javascript-obfuscator": "^4.1.1",
     "playwright":         "^1.64.0"
   },
+  "overrides": {
+    "js-yaml": "^4.3.2"
+  },
   "build": {
     "appId":           "tech.othermind.eva",
     "productName":     "EVA",

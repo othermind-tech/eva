@@ -13,9 +13,23 @@ updates:
       interval: weekly
     cooldown:
       default-days: 14
+    ignore:
+      # These major versions need Vite 8 and ESLint 10; move them together with those.
+      - dependency-name: "@vitejs/plugin-react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@eslint/js"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: npm
     directory: /build
     schedule:
       interval: weekly
     cooldown:
       default-days: 14
+    ignore:
+      # Major updates to the packaging tools change the installer build; take them by hand with a full install test.
+      - dependency-name: "electron-builder"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@electron/fuses"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "javascript-obfuscator"
+        update-types: ["version-update:semver-major"]

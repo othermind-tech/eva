@@ -19,7 +19,7 @@
   "devDependencies": {
     "@electron/fuses":    "^1.8.0",
     "electron":           "^44.9.3",
-    "electron-builder":   "^25.1.8",
+    "electron-builder":   "^26.18.0",
     "javascript-obfuscator": "^4.1.1",
     "playwright":         "^1.64.0"
   },

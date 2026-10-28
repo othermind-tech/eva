@@ -14,7 +14,9 @@ updates:
     cooldown:
       default-days: 14
     ignore:
-      # These major versions need Vite 8 and ESLint 10; move them together with those.
+      # Vite 8 goes together with @vitejs/plugin-react 6, and @eslint/js 10 needs ESLint 10; take these major updates together, by hand.
+      - dependency-name: "vite"
+        update-types: ["version-update:semver-major"]
       - dependency-name: "@vitejs/plugin-react"
         update-types: ["version-update:semver-major"]
       - dependency-name: "@eslint/js"
